@@ -22,3 +22,4 @@ docker exec -it kafka /bin/bash
 ---
 
 - https://dev.to/thegroo/one-to-run-them-all-1mg6
+- https://towardsdatascience.com/kafka-docker-python-408baf0e1088
