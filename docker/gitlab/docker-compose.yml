@@ -9,9 +9,9 @@ services:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'http://gitlab-app'
     ports:
-      - '8080:80'
-      - '443:443'
-      - '22:22'
+      - '10080:80'
+      - '10443:443'
+      - '10022:22'
     volumes:
       - '/srv/gitlab/config:/etc/gitlab'
       - '/srv/gitlab/logs:/var/log/gitlab'
