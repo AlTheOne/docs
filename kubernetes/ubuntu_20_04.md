@@ -317,7 +317,7 @@ sudo kubeadm join <host>:<port> --token <some_token> --discovery-token-ca-cert-h
 ---
 
 # Альтернативные инструкции установки
-- [Руководство по Kubernetes](https://help.reg.ru/hc/ru/articles/4408047657105-%D0%A0%D1%83%D0%BA%D0%BE%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE-%D0%BF%D0%BE-Kubernetes)
+- [Руководство по Kubernetes от REG.ru](https://help.reg.ru/hc/ru/articles/4408047657105-%D0%A0%D1%83%D0%BA%D0%BE%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE-%D0%BF%D0%BE-Kubernetes)
 - [Установка Kubernetes на Ubuntu Linux](https://techexpert.tips/ru/kubernetes-ru/%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-kubernetes-%D0%BD%D0%B0-ubuntu-linux/)
 
 
