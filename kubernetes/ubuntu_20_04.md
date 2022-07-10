@@ -30,6 +30,7 @@ ROM: 10 Gb
 - [HSHP](https://hshp.host/) (удалось отключить SWAP)
 
 ---
+
 # Обновление системы
 
 > Выполнить на:
@@ -212,6 +213,7 @@ II. Отредактировать файл `daemon.json`. Обычно файл
 sudo systemctl restart docker.service
 ```
 
+
 # Установка Kubernetes
 
 > Выполнить на:
@@ -243,6 +245,7 @@ sudo apt-mark hold kubeadm kubelet kubectl
 ```
 kubeadm version
 ```
+
 
 # Настройка управляющего узла Kubernetes
 
@@ -281,13 +284,15 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-6. Сеть подов
+6. Подключите поставщик оверлейной сети Flannel. \
+Используется для коммуникации между нодами в кластере
 ```
 sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 ```
 
 Проверьте, что сеть развёрнута:
 ```
+sudo kubectl get pods --all-namespaces
 ```
 
 
@@ -303,16 +308,20 @@ sudo hostnamectl set-hostname kubernetes-node01
 
 Где `kubernetes-node01` - название узла.
 
+2. Подключите вычислительный узел к управляемому.\
+Используйте команду полученную при успешной инициализации управляющего узла. 
+```
+sudo kubeadm join <host>:<port> --token <some_token> --discovery-token-ca-cert-hash sha256:<some_hash>
+```
+
 ---
 
-
 # Альтернативные инструкции установки
-
 - [Руководство по Kubernetes](https://help.reg.ru/hc/ru/articles/4408047657105-%D0%A0%D1%83%D0%BA%D0%BE%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE-%D0%BF%D0%BE-Kubernetes)
 - [Установка Kubernetes на Ubuntu Linux](https://techexpert.tips/ru/kubernetes-ru/%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-kubernetes-%D0%BD%D0%B0-ubuntu-linux/)
 
 
-# Полезные ссылки
+Полезные ссылки
 
 [^1]: [SWAP](https://help.ubuntu.ru/wiki/swap)
 [^2]: [Проблемы с установкой при различных cgroup](https://russianblogs.com/article/5706308202/)
