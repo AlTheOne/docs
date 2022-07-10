@@ -5,7 +5,7 @@ CPU: 2 core \
 RAM: 2 Gb \
 ROM: 10 Gb
 
-При развёртвынии на VPS убедитесь, что хостинг предоставляет возможность отключения SWAP[^1].
+При развёртвынии на VPS убедитесь, что на VPS не подключён SWAP или хостинг предоставляет возможность отключения SWAP.[^1]
 
 На практике были опробованы хостинги:
 - [Jino](https://jino.ru/) (не удалось отключить SWAP)
@@ -27,6 +27,42 @@ sudo apt update
 ```
 sudo apt upgrade
 ```
+
+# Отключение SWAP
+
+Для работы Kubernetes необходимо отключи подкачу памяти.\
+Иначе можно получить ошибку при запуске `kubeadm`:
+
+> [ERROR Swap]: running with swap on is not supported. Please disable swap
+
+1. Отключите swap для текущей сессии:
+```
+sudo swapoff -a
+```
+
+2. Чтобы отключить swap навсегда, отредактируйте файл `/etc/fstab`:
+```
+sudo nano /etc/fstab
+```
+
+<details> 
+  <summary>БЫЛО: /etc/fstab</summary>
+
+```
+/dev/disk/by-uuid/a24f00e7-918a-4a05-b4c9-35bdef750fb4 / ext4 defaults 0 0
+/swap.img       none    swap    sw      0       0
+```
+
+</details>
+
+<details> 
+  <summary>СТАЛО: /etc/fstab</summary>
+
+```
+/dev/disk/by-uuid/a24f00e7-918a-4a05-b4c9-35bdef750fb4 / ext4 defaults 0 0
+# /swap.img       none    swap    sw      0       0
+```
+</details>
 
 # Docker
 
@@ -57,7 +93,7 @@ sudo systemctl status docker
 Служба должна быть активна:
 ![Статус службы docker](https://img.reg.ru/faq/kubernetes-240820-1.png)
 
-5. Добавьте cgroup driver для Docker[^2].
+5. Добавьте cgroup driver для Docker.[^2]
 
 Для этого есть несколько способов:
 
@@ -165,9 +201,24 @@ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
 sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
 ```
 
+3. Установите пакеты Kubernetes
+```
+sudo apt install kubeadm kubelet kubectl
+```
 
+4. Исключите пакеты из обновления.[^3] \
+Данный шаг рекомендован, чтобы при обновлении системы пакеты Kubernetes не были обновлены автоматически и не нарушили работоспособнось кластера.
+```
+sudo apt-mark hold kubeadm kubelet kubectl
+```
+
+5. Выполните проверку версии `kubeadm`
+```
+kubeadm version
+```
 
 ---
 Полезные ссылки
 [^1]: [SWAP](https://help.ubuntu.ru/wiki/swap)
 [^2]: [Проблемы с установкой при различных cgroup](https://russianblogs.com/article/5706308202/)
+[^3]: [Удержание apt пакетов от обновления](https://itisgood.ru/2020/03/05/tri-sposoba-iskljuchit-uderzhat-predotvratit-obnovlenie-opredelennogo-paketa-s-apt-upgrade/)
