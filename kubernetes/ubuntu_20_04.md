@@ -30,6 +30,10 @@ sudo apt upgrade
 
 # Отключение SWAP
 
+> Выполнить на:
+> - Упраляющем узле
+> - Вычислительном узле
+
 Для работы Kubernetes необходимо отключи подкачу памяти.\
 Иначе можно получить ошибку при запуске `kubeadm`:
 
@@ -191,6 +195,11 @@ sudo systemctl restart docker.service
 ```
 
 # Установка Kubernetes
+
+> Выполнить на:
+> - Упраляющем узле
+> - Вычислительном узле
+
 1. Скачайте и устанавите GPG-ключ
 ```
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
@@ -217,8 +226,71 @@ sudo apt-mark hold kubeadm kubelet kubectl
 kubeadm version
 ```
 
+# Настройка управляющего узла Kubernetes
+
+> Выполнить на:
+> - Упраляющем узле
+
+1. Измените на машине hostname [^4]
+```
+sudo hostnamectl set-hostname kubernetes-master
+```
+
+Где `kubernetes-master` - название узла.
+
+2. Инициализируйте управляющий узел
+```
+sudo kubeadm init
+```
+
+Пример успешной инициализации:
+![Инициализация управляющего узла kubernetes](https://img.reg.ru/faq/kubernetes-240820-3.png)
+
+> [!] Скопируйте и сохраните вывод информации о команде `kubeadm join` для присоединения рабочих нод к кластеру.
+
+3. Создайте директорию для кластера
+```
+mkdir -p $HOME/.kube
+```
+
+4. Создайте символическую ссылку на файл настроек
+```
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+```
+
+5. Поменяйте группу и владельца
+```
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+6. Сеть подов
+```
+sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+```
+
+Проверьте, что сеть развёрнута:
+```
+```
+
+
+
+# Настройка вычислительного узла Kubernetes
+
+> Выполнить на:
+> - Вычислительном узле
+
+1. Изменить на машине hostname [^4]
+```
+sudo hostnamectl set-hostname kubernetes-node01
+```
+
+Где `kubernetes-node01` - название узла.
+
+
+
 ---
 Полезные ссылки
 [^1]: [SWAP](https://help.ubuntu.ru/wiki/swap)
 [^2]: [Проблемы с установкой при различных cgroup](https://russianblogs.com/article/5706308202/)
 [^3]: [Удержание apt пакетов от обновления](https://itisgood.ru/2020/03/05/tri-sposoba-iskljuchit-uderzhat-predotvratit-obnovlenie-opredelennogo-paketa-s-apt-upgrade/)
+[^4]: [Изменение hostname](https://userman.ru/2019/12/15/kak-izmenit-hostname-v-linux.html)
