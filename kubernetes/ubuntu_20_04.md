@@ -218,6 +218,11 @@ sudo systemctl restart docker.service
 > - Упраляющем узле
 > - Вычислительном узле
 
+0. В версии 20.04 и выше нет пакета `apt-add-repository`. Установите его:
+```
+sudo apt -y install software-properties-common dirmngr apt-transport-https lsb-release ca-certificates
+```
+
 1. Скачайте и устанавите GPG-ключ
 ```
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
