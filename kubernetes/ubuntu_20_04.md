@@ -119,13 +119,12 @@ sudo systemctl status docker
 
 Для этого есть несколько способов:
 
-I. Добавить флаг запуска `--exec-opt native.cgroupdriver=systemd` в `docker.service` \
+I. Добавить флаг запуска `--exec-opt native.cgroupdriver=systemd` в `docker.service` в директиву `ExecStart=...` \
+
 Обычно файл имеет путь: `/etc/systemd/system/multi-user.target.wants/docker.service`, но 
 если его нет, то можно поискать его командами:
 - Find: `sudo find /etc -name docker.serivce`
 - Locate: обновить базу - `updatedb` и выполнить поиск `locate docker.service`
-
-В файле `docker.service` добавить флаг `--exec-opt native.cgroupdriver=systemd` в директиву `ExecStart=...`
 
 <details> 
   <summary>БЫЛО: docker.service</summary>
@@ -229,18 +228,23 @@ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
 sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
 ```
 
-3. Установите пакеты Kubernetes
+3. Обновите индекс пакетов:
+```
+sudo apt update
+```
+
+4. Установите пакеты Kubernetes
 ```
 sudo apt install kubeadm kubelet kubectl
 ```
 
-4. Исключите пакеты из обновления.[^3] \
+5. Исключите пакеты из обновления.[^3] \
 Данный шаг рекомендован, чтобы при обновлении системы пакеты Kubernetes не были обновлены автоматически и не нарушили работоспособнось кластера.
 ```
 sudo apt-mark hold kubeadm kubelet kubectl
 ```
 
-5. Выполните проверку версии `kubeadm`
+6. Выполните проверку версии `kubeadm`
 ```
 kubeadm version
 ```
