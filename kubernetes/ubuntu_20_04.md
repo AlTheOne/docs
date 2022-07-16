@@ -269,7 +269,7 @@ sudo hostnamectl set-hostname kubernetes-master
 
 2. Инициализируйте управляющий узел
 ```
-sudo kubeadm init
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 ```
 
 Пример успешной инициализации:
