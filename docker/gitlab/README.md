@@ -17,11 +17,11 @@ services:
   web:
     image: 'gitlab/gitlab-ce:latest'
     restart: always
-    hostname: 'localhost'   # <--- Имя хоста внутри контейнера
+    hostname: 'localhost'
     container_name: gitlab-ce
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://localhost'   # <--- При настройке на сервере указать домен или публичный IP
+        external_url 'http://localhost'
     ports:
       - '8080:80'
       - '8443:443'
@@ -48,6 +48,9 @@ networks:
   gitlab:
     name: gitlab-network
 ```
+
+- `hostname: 'localhost'` - Имя хоста внутри контейнера
+- `external_url 'http://localhost'` - При настройке на сервере указать домен или публичный IP
 
 5. Запуск
 ```
