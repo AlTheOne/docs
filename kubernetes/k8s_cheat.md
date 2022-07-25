@@ -32,3 +32,15 @@ kubeadm token create --print-join-command
 ```shell
 kubectl taint node kubernetes-master node-role.kubernetes.io/master:NoSchedule-
 ```
+
+---
+
+Если не работает flannel проверьте наличие `/run/flannel/subnet.env`
+
+Содержимое:
+```
+FLANNEL_NETWORK=10.244.0.0/16
+FLANNEL_SUBNET=10.244.0.1/24
+FLANNEL_MTU=1450
+FLANNEL_IPMASQ=true
+```
