@@ -3,8 +3,7 @@
 # Description:  Primary install k8s
 # OS:           Ubuntu 20.04
 # Version:      0.1
-# Authors:      AlTheOne & gYaqubi
-# Source:       https://t.me/AlTheOne || https://t.me/gYaqubi
+# Telegram:     @AlTheOne @gYaqubi
 
 set -e
 
