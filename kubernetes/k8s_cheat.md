@@ -51,3 +51,5 @@ FLANNEL_SUBNET=10.244.0.1/24
 FLANNEL_MTU=1450
 FLANNEL_IPMASQ=true
 ```
+
+Такой конфиг должен быть на всех узлах.
