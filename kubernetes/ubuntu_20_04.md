@@ -292,7 +292,17 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-6. Подключите поставщик оверлейной сети Flannel. \
+6. Добавьте строку в `/etc/hosts` 
+```
+<EXTERNAL_IP>  kubernetes-master
+```
+
+- `<EXTERNAL_IP>` - Внешний IP сервера
+- `kubernetes-master` - Hostname узла
+
+При добавлении узлов необходимо прописывать их тоже в `/etc/hosts`.
+
+7. Подключите поставщик оверлейной сети Flannel. \
 Используется для коммуникации между нодами в кластере
 ```
 sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
@@ -315,6 +325,8 @@ sudo hostnamectl set-hostname kubernetes-node01
 ```
 
 Где `kubernetes-node01` - название узла.
+
+* Добавьте записи в `/etc/hosts` управляющего и вычислительного узла
 
 2. Подключите вычислительный узел к управляемому.\
 Используйте команду полученную при успешной инициализации управляющего узла. 
