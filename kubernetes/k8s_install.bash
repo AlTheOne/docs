@@ -5,6 +5,10 @@
 # Version:      0.1
 # Telegram:     @AlTheOne @gYaqubi
 
+# Upload to server...
+# scp k8s_install.bash USERNAME@IP:~
+# chmod +x k8s_install.bash
+
 set -e
 
 echo "########################################"
@@ -35,7 +39,7 @@ echo y | sudo apt install docker.io
 sudo systemctl enable docker
 sudo systemctl start docker
 
-cat <<EOF > demo.txt
+cat <<EOF > /etc/docker/daemon.json
 {
   "exec-opts": ["native.cgroupdriver=systemd"]
 }
@@ -56,7 +60,7 @@ sudo apt update
 
 
 echo "########################################"
-echo "## Install Kubernetes "
+echo "## Install Kubernetes"
 echo "########################################"
 
 echo y | sudo apt install kubeadm kubelet kubectl
