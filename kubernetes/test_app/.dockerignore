@@ -1,0 +1,12 @@
+.git
+.cache
+
+# Ide
+.idea
+.vscode
+
+# Environments
+venv
+
+env
+/.env
