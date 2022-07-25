@@ -22,6 +22,11 @@ sudo apt install -y htop mc micro curl
 
 
 echo "########################################"
+echo "## Swap OFF"
+echo "########################################"
+sudo swapoff -a
+
+echo "########################################"
 echo "## Install & Activate Docker.IO"
 echo "########################################"
 
