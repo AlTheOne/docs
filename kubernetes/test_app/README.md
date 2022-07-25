@@ -145,3 +145,8 @@ curl <CLUSTER_IP>:9980
 ```shell
 curl <CLUSTER_IP>:9980
 ```
+
+---
+
+Полезные статьи
+- https://www.kryukov.biz/kubernetes/set-kubernetes-teoriya/services/
