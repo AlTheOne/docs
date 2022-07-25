@@ -60,13 +60,6 @@ sudo apt update
 
 
 echo "########################################"
-echo "## Install Kubernetes"
-echo "########################################"
-
-echo y | sudo apt install kubeadm kubelet kubectl
-
-
-echo "########################################"
 echo "## Update OS Hostname"
 echo "########################################"
 
@@ -74,7 +67,14 @@ sudo hostnamectl set-hostname kubernetes-master
 
 
 echo "########################################"
-echo "## Update OS Hostname"
+echo "## Install Kubernetes"
+echo "########################################"
+
+echo y | sudo apt install kubeadm kubelet kubectl
+
+
+echo "########################################"
+echo "## Init k8s cluster"
 echo "########################################"
 
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16
