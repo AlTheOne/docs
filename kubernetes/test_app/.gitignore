@@ -1,0 +1,25 @@
+app/secrets.yaml
+
+# Unittests / reports
+.pytest_cache
+.hypothesis
+.coverage
+artefacts
+
+# Ide
+.idea
+.vscode
+
+# Environments
+venv
+env
+
+# Python
+__pycache__/
+*.py[cod]
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+/.env
