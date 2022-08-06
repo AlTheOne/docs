@@ -38,6 +38,7 @@ kubeadm token create --print-join-command
 - Разрешить запускать pod'ы на вычислительным узле
 ```shell
 kubectl taint node kubernetes-master node-role.kubernetes.io/control-plane:NoSchedule-
+kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
 
 ---
