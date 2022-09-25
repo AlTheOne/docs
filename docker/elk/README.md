@@ -13,6 +13,26 @@ Pull and run Elastic from DockerHub:
 docker run -d --name elasticsearch --net elknet -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e "ELASTIC_PASSWORD=pswd" elasticsearch:8.4.2
 ```
 
+<hr/>
+
+### Notes
+
+[!] When send request by curl
+```
+curl localhost:9200
+
+curl: (52) Empty reply from server
+```
+Resolve:
+1. Open `config/elasticsearch.yml`
+2. Change `xpack.security.enabled` from `false` to `true:
+```
+# Enable security features
+xpack.security.enabled: false
+```
+
+<hr/>
+
 ## Kibana
 
 Pull and run Kibana from DockerHub:
@@ -35,7 +55,7 @@ docker exec -ti kibana bin/kibana-verification-code
 - Login: `elastic`
 - Password: `pswd`
 
-# Logstash
+## Logstash
 
 Pull and run Logstash from DockerHub:
 ```bash
