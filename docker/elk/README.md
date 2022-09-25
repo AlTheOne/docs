@@ -37,7 +37,7 @@ docker exec -ti kibana bin/kibana-verification-code
 
 # Logstash
 
-Start
+Pull and run Logstash from DockerHub:
 ```bash
 docker run -d --name logstash --net elknet -v /home/altheone/projects/logstash/pipeline:/usr/share/logstash/pipeline -p 5044:5044 -p 9600:9600 logstash:8.4.2
 ```
