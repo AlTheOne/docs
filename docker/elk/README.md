@@ -25,7 +25,7 @@ curl: (52) Empty reply from server
 ```
 Resolve:
 1. Open `config/elasticsearch.yml`
-2. Change `xpack.security.enabled` from `false` to `true:
+2. Change `xpack.security.enabled` from `false` to `true`:
 ```
 # Enable security features
 xpack.security.enabled: false
