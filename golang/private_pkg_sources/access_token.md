@@ -1,4 +1,4 @@
-# Настройка доступа к Github/Gitlab с помощью Token
+# Настройка доступа к Github/Gitlab с помощью OAuth
 
 
 ## 1. Создать personal access token
