@@ -13,7 +13,7 @@ ARG SSH_CONFIG
 RUN apk add --update --no-cache git openssh
 
 # Git: change default method: https -> ssh
-RUN git config --global url.ssh://git@github.com/.insteadOf https://github.com/
+RUN git config --global url.ssh://git@github.com.insteadOf https://github.com
 
 # Go ENV
 RUN go env -w GO111MODULE=on
@@ -82,6 +82,6 @@ Host github.com
 docker buildx build . \
 	-t myimage \
 	--build-arg GOPRIVATE="github.com/private-org/*" \
-	--build-arg SSH_PRIVATE_KEY="$(cat ~/.ssh/id_rsa)" \
+	--build-arg SSH_ID_RSA="$(cat ~/.ssh/id_rsa)" \
 	--build-arg SSH_CONFIG="Host github.com\n\tHostname github.com\n\tUser AlTheOne\n\tIdentityFile /root/.ssh/id_rsa"
 ```
