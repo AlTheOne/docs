@@ -79,7 +79,7 @@ Host github.com
 
 ## Команда сборки образа
 ```sh
-docker buildx build . \
+docker build . \
 	-t myimage \
 	--build-arg GOPRIVATE="github.com/private-org/*" \
 	--build-arg SSH_ID_RSA="$(cat ~/.ssh/id_rsa)" \
