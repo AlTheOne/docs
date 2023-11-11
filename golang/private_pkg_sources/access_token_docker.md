@@ -9,7 +9,7 @@ ARG GOPRIVATE
 ARG GIT_TOKEN
 
 # Install needed lib
-RUN apk add --update --no-cache git openssh
+RUN apk add --update --no-cache git
 
 # GIT
 ENV GIT_TOKEN=$GIT_TOKEN
