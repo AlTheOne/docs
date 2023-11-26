@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  cadvisor-exporter:
+    image: gcr.io/cadvisor/cadvisor
+    privileged: true
+    ports:
+      - 8080:8080
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+
+  node_exporter:
+    image: prom/node-exporter
+    ports:
+      - 9100:9100
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana-enterprise
+    ports:
+      - 3000:3000
